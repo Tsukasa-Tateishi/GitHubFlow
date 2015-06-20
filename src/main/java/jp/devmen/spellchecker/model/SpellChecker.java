@@ -53,7 +53,11 @@ public class SpellChecker implements ISpellChecker {
 		// 検査不正であれば matchs の最初の要素(.get(0))の getSuggestedReplacements()
 		// で修正候補が取得できます。
 		// see. http://wiki.languagetool.org/java-api
-
-		return null;
+		boolean isValid = (matchs.size() == 0);
+		List<String> SuggestList = null;
+		if (!isValid) {
+			SuggestList = matchs.get(0).getSuggestedReplacements();
+		}
+		return ICheckResult.create(isValid, SuggestList);
 	}
 }
