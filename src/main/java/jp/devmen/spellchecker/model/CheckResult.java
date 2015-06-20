@@ -8,6 +8,9 @@ import java.util.List;
  */
 public class CheckResult implements ICheckResult {
 
+	private boolean isValid;
+	List<String> SuggestList;
+	
 	/**
 	 * コンストラクタ
 	 * 
@@ -15,15 +18,21 @@ public class CheckResult implements ICheckResult {
 	 * @param SuggestList
 	 */
 	protected CheckResult(boolean isValid, List<String> SuggestList) {
+		this.isValid = isValid;
+		this.SuggestList = SuggestList;
 	}
 
 	@Override
 	public boolean isValid() {
-		return false;
+		return isValid;
 	}
 
 	@Override
 	public List<String> getSuggestList() {
-		return null;
+		if (!isValid) {
+			return SuggestList;
+		} else {
+			return null;
+		}
 	}
 }
