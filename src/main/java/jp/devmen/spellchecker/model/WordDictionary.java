@@ -3,7 +3,9 @@
  */
 package jp.devmen.spellchecker.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -13,6 +15,7 @@ import java.util.List;
 public class WordDictionary implements IWordDictionary {
 
 	private static WordDictionary wordDictionary = new WordDictionary();
+	private List<String> hashSet = new ArrayList<String>();
 
 	/**
 	 * シングルトンのためコンストラクタをプライベートにします。
@@ -38,7 +41,11 @@ public class WordDictionary implements IWordDictionary {
 	 */
 	@Override
 	public boolean containts(String word) {
-		// 実装してください
+		for (String s : this.hashSet) {
+			if (s.equals(word)) {
+				return true;
+			}			
+		}
 		return false;
 	}
 
@@ -50,6 +57,7 @@ public class WordDictionary implements IWordDictionary {
 	 */
 	@Override
 	public void addWord(String word) {
+		this.hashSet.add(word);
 	}
 
 	/**
@@ -59,7 +67,6 @@ public class WordDictionary implements IWordDictionary {
 	 */
 	@Override
 	public List<String> getAllWord() {
-		return Arrays.asList("Cat", "Dog", "Animal", "Fish", "Cow");
+		return hashSet;
 	}
-
 }
